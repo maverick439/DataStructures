@@ -29,10 +29,34 @@ int rotate(int arr[],int d,int n){
 		rotate_one(arr,n);
 }
 
-/* Alternate Method
+/* Alternate Method - 1
 Use a separate temporary array.
 arr = {1,2,3,4,5} d=2
 temp = {1,2}
 arr = {3,4,5,4,5}
 arr = [3,4,5,1,2]
 O(n)
+*/
+
+
+//Using multiple reverse statements
+//Alternate Method 2
+/* void rvereseArray(int arr[], int start, int end)
+{
+    while (start < end)
+    {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}
+ 
+void leftRotate(int arr[], int d, int n)
+{
+    rvereseArray(arr, 0, d-1);
+    rvereseArray(arr, d, n-1);
+    rvereseArray(arr, 0, n-1);
+}
+*/
