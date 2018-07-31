@@ -24,6 +24,27 @@ int lowerbound(int arr[],int n,int key){
     return ans;
 }
 
+int upperbound(int arr[],int n,int key){
+    int l = 0;
+    int r = n-1;
+    int ans = -1;
+    while(l <= r){
+        int mid = (l+r)/2;
+        if(key == arr[mid]){
+            ans = mid;
+            l = mid+1;
+        }
+        else if(key < arr[mid]){
+            r = mid - 1;
+        }
+        else{
+            l = mid + 1;
+        }
+    }
+    return ans;
+}
+
+
 int main() {
     int n,key;
     int arr[100];
@@ -33,9 +54,11 @@ int main() {
         cin>>arr[i];
     }
     cin>>key;
-    int pos = lowerbound(arr,n,key);
-    cout<<pos;
-
+    int lower = lowerbound(arr,n,key);
+    cout<<"Lower Bound : "<<lower;
+    
+    int upper = upperbound(arr,n,key);
+    cout<<"Upper Bound : "<<upper;
 }
 
 /*
@@ -44,5 +67,7 @@ Input :
 1 1 2 2 2 2 4
 2
 
-Output : 2
+Output : 
+lower = 2
+upper = 5
 */
