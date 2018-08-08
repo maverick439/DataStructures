@@ -7,6 +7,7 @@ const int inf = (int)1e9;
 #define MIN(x,y) (x<y?x:y)
 int memo[1000];
 
+//Top Down Approach
 int reduce(int n){
     if(n == 1)
         return 0;
@@ -18,11 +19,28 @@ int reduce(int n){
     return memo[n];
 }
 
+//Bottom Up Approach
+int reduceNo(int n){
+    int dp[10000];
+    dp[0] = 0;
+    dp[1] = 0;
+    dp[2] = 1;
+    dp[3] = 1;
+    for(int curNum = 4;curNum <= n;curNum++){
+        int q1 = inf, q2 = inf, q3 = inf;
+        if(curNum%3 == 0)   q1 = 1 + dp[curNum/3];
+        if(curNum%2 == 0)   q2 = 1 + dp[curNum/2];
+        q3 = 1 + dp[curNum-1];
+        dp[curNum] = MIN(q1, MIN(q2,q3));
+    }
+    return dp[n];
+}
+
 int main() {
     int n;
     cin>>n;
     fill(memo,memo+n+1,-1);     //Can use for loop here
-    int ans = reduce(n);
+    int ans = reduceNo(n);
     cout<<ans;
     return 0;
 }
