@@ -1,4 +1,4 @@
-//Approach 1
+//Approach 1: O(n*d)solution
 
 vector<int> rotLeft(vector<int> a, int d) {
     int n = a.size();
@@ -11,4 +11,16 @@ vector<int> rotLeft(vector<int> a, int d) {
     }
     return a;
 
+}
+
+//Approach 2: O(n) solution 
+vector<int> rotLeft(vector<int> a, int d) {
+    vector<int> result;
+    for(int i=d;i<a.size();i++){
+        result.push_back(a[i]);
+    }
+    for(int i=0;i<d;i++){
+        result.push_back(a[i]);
+    }
+    return result;
 }
