@@ -71,3 +71,39 @@ Output - 3
 
 
 */
+
+// BFS based solution
+class Solution {
+public: 
+    int numIslands(vector<vector<char>>& grid) {
+        int island_count = 0;
+        if(grid.size() == 0){ return island_count; }
+        // BFS based solution
+        for(int row=0;row < grid.size();row++){
+            for(int col=0;col < grid[0].size();col++){
+                if(grid[row][col] == '1') {
+                    island_count++;
+                    queue<pair<int, int>> bfs;
+                    bfs.push({row, col});
+                    while(!bfs.empty()) {
+                        pair<int, int>visited_node = bfs.front();
+                        bfs.pop();
+                        for(auto d : dir) {
+                            int next_row = visited_node.first + d.first;
+                            int next_col = visited_node.second + d.second;
+                            if(next_row >= 0 && next_row < grid.size() && next_col >= 0 && next_col < grid[0].size() && grid[next_row][next_col] == '1') {
+                                grid[next_row][next_col] = '2';
+                                bfs.push(make_pair(next_row, next_col));
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+        return island_count;
+    }
+private:
+    // To cover an entire island in one go
+    vector<pair<int, int>> dir{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};//<row, column>
+};
