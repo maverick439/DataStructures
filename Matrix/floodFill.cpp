@@ -58,5 +58,6 @@ public:
                 togo.push_back({rr,cc});
             }
         }
+        return image;
     }
 };
