@@ -45,3 +45,37 @@ private:
 private:
     vector<pair<int,int>> dir{{1,0}, {-1,0}, {0,1}, {0,-1}};
 };
+
+// APPROACH 2 : DFS ===============================
+
+class Solution {
+public:
+    int maxAll = 0; int maxNow = 0;
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        int ans = 0;  
+        for(int i = 0; i < grid.size(); i++){
+            for(int j = 0; j < grid[0].size(); j++){
+                int island_count = 0;
+                if(grid[i][j] == 1){
+                    maxNow = 0;
+                    dfs(grid, i, j);
+                }
+            }
+        }
+        return maxAll;
+    }
+    
+    void dfs(vector<vector<int>>&grid, int r, int c){
+        if(r < 0 || r >= grid.size() || c < 0 || c >= grid[0].size())   return;
+        if(grid[r][c] != 1) return;
+        maxNow++;
+        grid[r][c] = -1;
+        
+        dfs(grid, r+1, c);
+        dfs(grid, r-1, c);
+        dfs(grid, r, c+1);
+        dfs(grid, r, c-1);
+        
+        maxAll = max(maxAll, maxNow);
+    }
+};
